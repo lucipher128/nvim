@@ -6,6 +6,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'flazz/vim-colorschemes'
 Plug 'rhysd/vim-clang-format'
+Plug 'junegunn/goyo.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mhinz/vim-startify'
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-surround'
@@ -15,8 +19,10 @@ Plug 'honza/vim-snippets'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-"ultisnips parametres 
+let mapleader =","
 
+
+nnoremap <leader>= :Goyo<CR>
 
 
 filetype plugin indent on
@@ -40,41 +46,81 @@ colorscheme gruvbox
 
 
 
-let mapleader =","
 
 
 "command t "
 nnoremap <leader>t :FZF<CR>
+
+
 "nerd tree"'
+
+
+
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+call NERDTreeHighlightFile('makefile', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('cpp', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('h', 'Magenta', 'none', '#ff00ff', '#151515')
+
+
+
+
+set splitbelow
+
+autocmd vimenter * NERDTree 	"open nerdtree on startup
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <leader>m :NERDTreeToggle<CR>
+
+autocmd VimEnter * wincmd l
+autocmd VimEnter * ++nested 10sp term://bash
+autocmd VimEnter * wincmd k
+
 "buffer navig"
-nnoremap <C-b> :bp<CR>
-nnoremap <C-n> :bn<CR>
+
+nnoremap <c-b> :bp<cr>
+nnoremap <c-n> :bn<cr>
 "split navig "
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-j> <C-w><C-j>
+nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-j> <c-w><c-j>
 
 
-nnoremap <C-UP> :res +5<CR>
-nnoremap <C-DOWN> :res -5<CR>
-nnoremap <C-LEFT> :vertical res +5<CR>
-nnoremap <C-RIGHT> :vertical res -5<CR>
+nnoremap <c-up> :res +5<cr>
+nnoremap <c-down> :res -5<cr>
+nnoremap <c-left> :vertical res +5<cr>
+nnoremap <c-right> :vertical res -5<cr>
 "invert splits "
-nnoremap <leader>w <C-w>R
+nnoremap <leader>w <c-w>r
 "open terminal"
-nnoremap <leader>tt :terminal<CR>
+nnoremap <leader>tt : 10sp term://bash<cr>
+
+tnoremap <C-h> <C-\><C-n><C-w>h	
+tnoremap <C-j> <C-\><C-n><C-w>j	
+tnoremap <C-k> <C-\><C-n><C-w>k	
+tnoremap <C-l> <C-\><C-n><C-w>l	
 
 
-" if hidden is not set, TextEdit might fail.
-set hidden
 
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
-" Better display for messages
-set cmdheight=2
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300

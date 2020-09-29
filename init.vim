@@ -27,6 +27,10 @@ nnoremap <leader>= :Goyo<CR>
 
 filetype plugin indent on
 
+set shiftwidth=0
+set tabstop=3
+set expandtab
+set nohlsearch
 set number relativenumber
 set hidden 
 set noswapfile
@@ -87,7 +91,6 @@ autocmd vimenter * NERDTree 	"open nerdtree on startup
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <leader>m :NERDTreeToggle<CR>
 
 autocmd VimEnter * wincmd l
@@ -118,6 +121,9 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j	
 tnoremap <C-k> <C-\><C-n><C-w>k	
 tnoremap <C-l> <C-\><C-n><C-w>l	
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 
 

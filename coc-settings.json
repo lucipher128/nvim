@@ -5,6 +5,7 @@
             "filetypes": [
                 "c",
                 "cpp",
+		"h",
                 "objc",
                 "objcpp"
             ],

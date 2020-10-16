@@ -7,14 +7,15 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'flazz/vim-colorschemes'
 Plug 'rhysd/vim-clang-format'
 Plug 'junegunn/goyo.vim'
+Plug 'puremourning/vimspector'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-surround'
-Plug 'preservim/nerdcommenter'
 Plug 'honza/vim-snippets'
+Plug 'tpope/vim-commentary'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -27,6 +28,7 @@ nnoremap <leader>= :Goyo<CR>
 
 filetype plugin indent on
 
+set ignorecase
 set shiftwidth=0
 set tabstop=3
 set expandtab
@@ -47,6 +49,7 @@ highlight ColorColumn ctermbg=darkgrey
 syntax on 
 
 colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
 
 
 
@@ -58,6 +61,7 @@ nnoremap <leader>t :FZF<CR>
 
 "nerd tree"'
 
+autocmd vimenter * NERDTree 	"open nerdtree on startup
 
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -86,7 +90,6 @@ call NERDTreeHighlightFile('h', 'Magenta', 'none', '#ff00ff', '#151515')
 
 set splitbelow
 
-autocmd vimenter * NERDTree 	"open nerdtree on startup
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -108,10 +111,10 @@ nnoremap <c-k> <c-w><c-k>
 nnoremap <c-j> <c-w><c-j>
 
 
-nnoremap <c-up> :res +5<cr>
-nnoremap <c-down> :res -5<cr>
-nnoremap <c-left> :vertical res +5<cr>
-nnoremap <c-right> :vertical res -5<cr>
+nnoremap <leader>z   :res +5<cr>
+nnoremap <leader>s   :res -5<cr>
+nnoremap <leader>d   :vertical res +5<cr>
+nnoremap <leader>q   :vertical res -5<cr>
 "invert splits "
 nnoremap <leader>w <c-w>r
 "open terminal"
@@ -122,11 +125,15 @@ tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k	
 tnoremap <C-l> <C-\><C-n><C-w>l	
 
+nnoremap <leader>² :tab split<CR>
+vnoremap <leader>² :tab split<CR>
+
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-
-
+"this way i can insert a line with enter Shift enter without going in insert 
+nmap <leader><CR> O<Esc>j
+nmap <CR> o<Esc>k
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
@@ -265,6 +272,9 @@ let g:clang_format#style_options = {
             \ "AllowShortIfStatementsOnASingleLine" : "true",
             \ "AlwaysBreakTemplateDeclarations" : "true",
             \ "Standard" : "C++11"}
+
+let g:vimspector_enable_mappings = 'HUMAN'
+nnoremap <F2> <Plug>VimspectorStepInto
 
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>

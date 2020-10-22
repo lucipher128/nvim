@@ -49,7 +49,7 @@ highlight ColorColumn ctermbg=darkgrey
 syntax on 
 
 colorscheme gruvbox
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
 
 
 

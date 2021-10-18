@@ -2,11 +2,19 @@
 local set = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true }
 -- telescope mappings
+set('n', '<leader>mp', '<cmd> Telescope keymaps <CR>', opts)
 set('n', '<leader>ff', '<cmd> Telescope find_files <CR>', opts)
-set('n', '<leader>F', '<cmd> Teleescope find_files cwd=/mnt/Travail <CR>', opts)
+set('n', '<leader>F', '<cmd> Telescope find_files cwd=/mnt/Travail <CR>', opts)
 set('n', '<leader>fg', '<cmd> Telescope live_grep cwd=/mnt/Travail <CR>', opts)
 set('n', '<leader>fb', '<cmd> Telescope buffers <CR>', opts)
 set('n', '<leader>fh', '<cmd> Telescope help_tags <CR>', opts)
+set('n', '<leader>di', '<cmd> Telescope lsp_document_diagnostics <CR>', opts)
+set('n', '<leader>sm', '<cmd> Telescope lsp_document_symbols <CR>', opts)
+
+set('n', '<leader>co', '<cmd> Telescope git_commits <CR>', opts)
+set('n', '<leader>br', '<cmd> Telescope git_branches <CR>', opts)
+set('n', '<leader>st', '<cmd> Telescope git_stash <CR>', opts)
+
 -- nvim tree mappings
 set('n', '<leader>m', '<cmd> NvimTreeToggle <CR>', opts)
 --    permanent mappings
@@ -29,11 +37,11 @@ set('n', '<leader>w', '<C-w>r', opts)
 set('n', '<leader>tt', '<cmd> 10sp term://bash<CR>', opts)
 -- split focus
 set('n', '<leader>²', '<C-w>r', opts)
--- git fugitive mappings 
+-- git fugitive mappings
 set('n', '<leader>gc', '<cmd> G<CR>', opts)
-set('n', '<leader>h', '<cmd> GCheckout<CR>', opts)
-set('n', '<leader>f', '<cmd> getdiff //2<CR>', opts)
-set('n', '<leader>j', '<cmd> getdiff //3<CR>', opts)
+set('n', '<leader>ds', '<cmd> Gvdiffsplit!<CR>', opts)
+set('n', '<leader>h', '<cmd> diffget //2<CR>', opts)
+set('n', '<leader>l', '<cmd> diffget //3<CR>', opts)
 
 -- move lines 
 set('v', 'J', '<cmd> m \'>+1<CR>gv=gv', opts)

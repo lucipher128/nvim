@@ -6,10 +6,10 @@ local opts_term = {tnoremap = true, silent = true }
 set('n', '<leader>mp', '<cmd> Telescope keymaps <CR>', opts)
 set('n', '<leader>ff', '<cmd> Telescope find_files <CR>', opts)
 set('n', '<leader>F', '<cmd> Telescope find_files cwd=/mnt/Travail <CR>', opts)
-set('n', '<leader>fg', '<cmd> Telescope live_grep cwd=/mnt/Travail <CR>', opts)
+set('n', '<leader>fg', '<cmd> Telescope live_grep<CR>', opts)
 set('n', '<leader>fb', '<cmd> Telescope buffers <CR>', opts)
 set('n', '<leader>fh', '<cmd> Telescope help_tags <CR>', opts)
-set('n', '<leader>di', '<cmd> Telescope lsp_document_diagnostics <CR>', opts)
+set('n', '<leader>di', '<cmd> Telescope diagnostics bufnr=0 <CR>', opts)
 set('n', '<leader>sm', '<cmd> Telescope lsp_document_symbols <CR>', opts)
 
 set('n', '<leader>co', '<cmd> Telescope git_commits <CR>', opts)
@@ -25,8 +25,8 @@ set('n', '<C-n>', '<cmd>bn <CR>', opts)
 -- split nav
 set('n', '<C-l>', '<C-w><C-l>', opts)
 set('n', '<C-h>', '<C-w><C-h>', opts)
-set('n', '<C-j>', '<C-w><C-j>', opts)
 set('n', '<C-k>', '<C-w><C-k>', opts)
+set('n', '<C-j>', '<C-w><C-j>', opts)
 -- terminal navigation
 -- set('n', '<C-l>', '<C-w><C-l>', opts_term)
 -- set('n', '<C-h>', '<C-w><C-h>', opts_term)
@@ -57,26 +57,29 @@ set('n', '<leader>l', '<cmd> diffget //3<CR>', opts)
 --clipboard to system
 set('v', '<leader>y', '"+y', opts)
 set('n', '<leader>y', '"+y', opts)
-
-
-set('v', '<leader>p', '"+p', opts)
-set('n', '<leader>p', '"+p', opts)
+-- clang reformat
+set('n', '<leader>cf', '<cmd>ClangFormat<CR>', opts)
 
 -- move lines 
 set('v', 'J', '<cmd> m \'>+1<CR>gv=gv', opts)
 set('v', 'K', '<cmd> m \'>-2<CR>gv=gv', opts)
+-- Cmake commands
+set('n', '<leader>cg', '<cmd>CMakeGenerate <CR>', opts)
+set('n', '<leader>cb', '<cmd>CMakeBuild<CR>', opts)
+set('n', '<leader>cc', '<cmd>CMakeClean<CR>', opts)
+set('n', '<leader>c', '<cmd>CMakeClose<CR>', opts)
 
-vim.cmd[[imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
-vim.cmd[[smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
+-- vim.cmd[[imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
+-- vim.cmd[[smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
 
-vim.cmd[[imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']]
-vim.cmd[[smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']]
+-- vim.cmd[[imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']]
+-- vim.cmd[[smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']]
 
-vim.cmd[[imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
-vim.cmd[[smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
+-- vim.cmd[[imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
+-- vim.cmd[[smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
 
-vim.cmd[[imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
-vim.cmd[[smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
+-- vim.cmd[[imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
+-- vim.cmd[[smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
 
 -- " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
 -- " See https://github.com/hrsh7th/vim-vsnip/pull/50

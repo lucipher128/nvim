@@ -1,3 +1,4 @@
+
 vim.g.mapleader = " "
 vim.g.vimsyn_embed = '1'
 vim.g.vsnip_snippet_dirs = {'~/.local/share/nvim/site/pack/packer/start/friendly-snippets/snippets'}
@@ -16,6 +17,7 @@ vim.opt.ruler = true
 vim.opt.laststatus = 2
 vim.opt.splitbelow = false
 vim.opt.splitright = true
+vim.opt.termguicolors = true
 vim.opt.colorcolumn = '110'
 vim.opt.syntax = 'on'
 vim.opt.background = 'dark'
@@ -27,13 +29,14 @@ vim.opt.completeopt = {"menuone", "noinsert", "noselect"}
 vim.wo.relativenumber = true
 vim.wo.number = true
 
-vim.api.nvim_command[[set termguicolors]]
-vim.api.nvim_command [[colorscheme gruvbox]]
+vim.api.nvim_command [[colorscheme catppuccin-mocha]]
 vim.api.nvim_command [[hi Normal guibg=NONE]]
 vim.api.nvim_command [[hi NonText guibg=NONE]]
 
 
+
 vim.cmd[[set fillchars+=vert:\ ]]
+vim.cmd[[let g:cmake_link_compile_commands=1]]
 vim.cmd[[
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -4,
